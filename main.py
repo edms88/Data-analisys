@@ -5,6 +5,7 @@ import pygwalker as pyg
 import os
 import webbrowser
 from pathlib import Path
+import openpyxl
 
 # Path & settings
 current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
