@@ -1,0 +1,1 @@
+A biblioteca Pygwalker para Python traz visualizações interativas ao estilo do Google Data Studio para Jupyter Notebooks e scripts Python, transformando rapidamente dados de um DataFrame em gráficos dinâmicos. Ideal para análise exploratória, facilita insights ágeis sem exigir conhecimento avançado em visualização.
