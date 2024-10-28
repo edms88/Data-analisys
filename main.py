@@ -3,6 +3,7 @@ import pandas as pd
 import os
 from pygwalker.api.streamlit import StreamlitRenderer
 from pathlib import Path
+import chardet
 
 # Path & settings
 current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -31,13 +32,18 @@ with col1:
     st.write(bio_label)
 
 ### Body Functional ###
-
+def detecter_encodi(caminho_arquivo):
+    with open(caminho_arquivo, 'rb') as f:
+        resultado = chardet.detect(f.read)
+    return resultado['encoding']
+    
 def read_file(uploaded_file):
     file_extension = os.path.splitext(uploaded_file.name)[1].lower()
 
     if file_extension == '.csv':
-        df = pd.read_csv(uploaded_file)
-        st.write(f'Leitura do arquivo CSV: {uploaded_file.name}')
+        encoding = detecter_encodi(uploaded_file)
+        df = pd.read_csv(uploaded_file, encoding=encoding)
+        st.write(f'Leitura do arquivo CSV: {uploaded_file.name} com o encoding {encoding}')
     elif file_extension in ['.xls', '.xlsx']:
         # Lê o arquivo Excel
         df = pd.read_excel(uploaded_file, engine='openpyxl')
